@@ -1,5 +1,9 @@
 # ComfyUI-Lumina-mGPT-Wrapper
 
+## Experimental (WIP) 
+
+Currently generates, took 33 minutes on a 4090 at 5 steps with the 512 model but failed at decoding stage, debugging now
+
 ## Lumina-mGPT Node for ComfyUI
 
 This custom node seamlessly integrates the Lumina-mGPT model into ComfyUI, enabling high-quality image generation using the advanced Lumina text-to-image pipeline. It offers a robust implementation with support for various model sizes and advanced features.
