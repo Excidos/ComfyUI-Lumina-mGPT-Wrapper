@@ -4,6 +4,25 @@
 
 This custom node seamlessly integrates the Lumina-mGPT model into ComfyUI, enabling high-quality image generation using the advanced Lumina text-to-image pipeline. It offers a robust implementation with support for various model sizes and advanced features.
 
+## Prepration
+
+https://ai.meta.com/resources/models-and-libraries/chameleon-downloads/
+
+Since currently the Chameleon implementation in transformers does not contain the VQ-VAE decoder, please manually download the original VQ-VAE weights provided by Meta and put them to the following directory:
+
+Lumina-mGPT
+- lumina_mgpt/
+    - ckpts/
+        - chameleon/
+            - tokenizer/
+                - text_tokenizer.json
+                - vqgan.yaml
+                - vqgan.ckpt
+- xllmx/
+- ...
+
+
+
 ## Features
 
 - Harnesses the power of the Lumina-mGPT model for state-of-the-art image generation
