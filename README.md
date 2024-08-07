@@ -1,6 +1,3 @@
-Certainly! I'll create a README.md for your Lumina-mGPT node, drawing inspiration from your other node's README. Here's a draft:
-
-```markdown
 # ComfyUI-Lumina-mGPT-Wrapper
 
 ## Lumina-mGPT Node for ComfyUI
@@ -20,9 +17,6 @@ This custom node seamlessly integrates the Lumina-mGPT model into ComfyUI, enabl
 
 1. Ensure you have ComfyUI installed and properly set up.
 2. Clone this repository into your ComfyUI custom nodes directory:
-   ```
-   git clone https://github.com/YourUsername/ComfyUI-Lumina-mGPT-Wrapper.git
-   ```
 3. The required dependencies will be automatically installed.
 
 ## Usage
@@ -80,6 +74,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 - [Lumina-mGPT](https://huggingface.co/Alpha-VLLM/Lumina-mGPT-7B-768) for the Lumina-mGPT model
 - The ComfyUI community for their continuous support and inspiration
-```
-
-Feel free to adjust any details or add more information as needed. You might want to include more specific installation instructions, additional parameters, or example workflows once you've fully tested the node.
