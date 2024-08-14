@@ -1,7 +1,7 @@
 # ComfyUI-Lumina-mGPT-Wrapper
 
 ## Overview
-This custom node integrates the Lumina-mGPT model into ComfyUI, enabling high-quality image generation using the advanced Lumina text-to-image pipeline. It offers a robust implementation with support for various model sizes and advanced features.
+This custom node integrates the Lumina-mGPT model into ComfyUI, enabling high-quality image generation using the advanced Lumina text-to-image pipeline. It offers a robust implementation with support for various model sizes and advanced features, including improved latent space handling and flexible crop sizes.
 
 ## Features
 - Harnesses the power of the Lumina-mGPT model for state-of-the-art image generation
@@ -12,6 +12,9 @@ This custom node integrates the Lumina-mGPT model into ComfyUI, enabling high-qu
 - Outputs both generated images and latent representations
 - Includes a converter node for ComfyUI compatibility
 - Provides a decoder node for latent-to-image conversion
+- Improved latent space handling for better compatibility with ComfyUI
+- Flexible crop sizes with automatic adjustment to valid dimensions
+- Enhanced error handling and logging for easier troubleshooting
 
 ## Preparation
 Since the Chameleon implementation in transformers does not contain the VQ-VAE decoder, please manually download the original VQ-VAE weights provided by Meta and place them in the following directory:
@@ -70,6 +73,7 @@ You can download the required files from [Meta's Chameleon Downloads](https://ai
 ### Lumina-mGPT Crop Selector
 - `target_size`: Select from 512, 768, or 1024
 - `aspectRatio`: Choose from various aspect ratios (1:1, 4:3, 16:9, etc.)
+- `crop_size`: Select from a list of valid crop sizes or "None" for automatic selection
 
 ### Lumina-mGPT Image Generate
 - `lumina_mgpt_model`: Connected from the Load Lumina-mGPT Model node
@@ -85,6 +89,7 @@ You can download the required files from [Meta's Chameleon Downloads](https://ai
 
 ### Lumina-mGPT Decoder
 - `latent`: Input latent representation to decode into an image
+- `output_type`: Choose between "IMAGE" or "LATENT" output
 
 ## Outputs
 - `IMAGE`: Generated or decoded image
@@ -113,6 +118,9 @@ You can download the required files from [Meta's Chameleon Downloads](https://ai
 - Implements cfg and image top-k parameters for controlling the generation process
 - Outputs both images and latent representations
 - Includes converter and decoder nodes for enhanced compatibility and flexibility
+- Improved latent space handling ensures better compatibility with ComfyUI's expectations
+- Automatic adjustment of crop sizes to valid dimensions for each model size
+- Enhanced error handling and logging for easier troubleshooting and debugging
 
 ## Troubleshooting
 If you encounter any issues, please check the console output for error messages. Common issues include:
