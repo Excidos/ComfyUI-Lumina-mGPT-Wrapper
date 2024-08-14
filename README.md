@@ -18,6 +18,9 @@ Since the Chameleon implementation in transformers does not contain the VQ-VAE d
 
 ### NOTE: I've added the files to the respective path however they will need to be extracted from the zip file before running the node.
 
+## "ComfyUI-Lumina-mGPT-Wrapper/Lumina-mGPT/lumina_mgpt/ckpts/chameleon/tokenizer.zip"
+
+
 ```
 Lumina-mGPT
 - lumina_mgpt/
@@ -96,8 +99,10 @@ You can download the required files from [Meta's Chameleon Downloads](https://ai
 ## 768 x 768 
 ![ComfyUI_temp_otjku_00002_](https://github.com/user-attachments/assets/17fa9ba5-323e-41ef-a27e-ac26dc82e22b)
 
+![ComfyUI_temp_otjku_00004_](https://github.com/user-attachments/assets/902d79a1-7bff-42c5-a4f2-c2b334a89ed6)
 
 
+## Workflow
 ![Screenshot 2024-08-14 082926](https://github.com/user-attachments/assets/c6c064ad-5805-4d71-9d90-cb665728a995)
 
 
