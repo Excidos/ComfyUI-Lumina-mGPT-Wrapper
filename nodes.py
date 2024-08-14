@@ -1,6 +1,7 @@
 import os
 import logging
 import torch
+import torch.nn.functional as F
 import numpy as np
 from PIL import Image
 from lumina_mgpt.inference_solver import FlexARInferenceSolver
@@ -164,14 +165,11 @@ class LuminamGPTImageGenerate:
 
     def generate(self, lumina_mgpt_model, prompt, cfg, seed, image_top_k, temperature, resolution="768x768", resolution_input=None):
         try:
-            # Use resolution_input if provided, otherwise use resolution
             resolution_to_use = resolution_input if resolution_input else resolution
             width, height = map(int, resolution_to_use.split('x'))
 
-            # Determine the target size based on the resolution
             target_size = 768 if max(width, height) > 512 else 512
 
-            # Ensure resolution is valid
             if resolution_to_use not in VALID_CROP_SIZES[target_size]:
                 closest_resolution = min(VALID_CROP_SIZES[target_size], key=lambda x: abs(int(x.split('x')[0]) - width) + abs(int(x.split('x')[1]) - height))
                 logger.warning(f"Adjusted resolution from {resolution_to_use} to {closest_resolution} to match valid crop sizes for {target_size} model.")
@@ -229,7 +227,7 @@ class LuminamGPTImageGenerate:
 
         except Exception as e:
             logger.error(f"Error in generate method: {str(e)}")
-            logger.error(traceback.format_exc())
+            logger.exception("Exception traceback:")
             raise
 
     def image_to_latent(self, image_tensor):
@@ -240,6 +238,10 @@ class LuminamGPTImageGenerate:
         if latent.shape[1] != 4:
             # If we have 3 channels, we can repeat one channel to get 4
             latent = latent.repeat(1, 2, 1, 1)[:, :4, :, :]
+        
+        # Downsample to match expected latent size (1/8th of image size)
+        B, C, H, W = latent.shape
+        latent = F.interpolate(latent, size=(H // 8, W // 8), mode='bilinear', align_corners=False)
         
         return {"samples": latent}
 
@@ -282,41 +284,55 @@ class LuminamGPTDecoder:
     FUNCTION = "decode"
     CATEGORY = "LuminaWrapper"
 
-    def decode(self, latent, output_type):
-        # Extract the samples from the latent dict
+    def decode(self, latent, output_type="LATENT"):
         latent_samples = latent['samples']
         
         # Ensure the latent is in the correct shape [B, C, H, W]
         if latent_samples.dim() == 3:
             latent_samples = latent_samples.unsqueeze(0)
         
-        # Convert from [-1, 1] to [0, 1] range
-        normalized_samples = (latent_samples + 1) / 2
-        normalized_samples = normalized_samples.clamp(0, 1)
-
-        if output_type == "IMAGE":
-            # For image output, ensure we have 3 channels (RGB)
-            if normalized_samples.shape[1] != 3:
-                normalized_samples = normalized_samples[:, :3, :, :]
-            
-            # Convert from [B, C, H, W] to [B, H, W, C]
-            image = normalized_samples.permute(0, 2, 3, 1)
-            return (image, None)
+        B, C, H, W = latent_samples.shape
         
+        # Adjust channel count to 4 if necessary
+        if C != 4:
+            latent_samples = latent_samples.repeat(1, 4 // C + 1, 1, 1)[:, :4, :, :]
+        
+        # Ensure latent dimensions are valid (multiples of 8)
+        if H % 8 != 0 or W % 8 != 0:
+            new_H = ((H + 7) // 8) * 8
+            new_W = ((W + 7) // 8) * 8
+            latent_samples = F.interpolate(latent_samples, size=(new_H, new_W), mode='bilinear', align_corners=False)
+        
+        # Normalize to [-1, 1] range
+        latent_samples = torch.clamp(latent_samples, -1, 1)
+        
+        if output_type == "IMAGE":
+            # Convert latents to image space
+            image = (latent_samples + 1) / 2  # Convert from [-1, 1] to [0, 1]
+            image = image[:, :3, :, :]  # Take only the first 3 channels
+            image = F.interpolate(image, scale_factor=8, mode='bilinear', align_corners=False)
+            image = image.permute(0, 2, 3, 1).clamp(0, 1)  # [B, H, W, C]
+            return image, None
         else:  # LATENT output
-            # For latent output, ensure we have 4 channels
-            B, C, H, W = normalized_samples.shape
-            if C != 4:
-                normalized_samples = normalized_samples.repeat(1, 2, 1, 1)[:, :4, :, :]
-            
-            # Adjust the spatial dimensions to match ComfyUI expectations (assuming 8x downscaling)
-            target_h, target_w = H // 8, W // 8
-            comfy_latent = torch.nn.functional.interpolate(normalized_samples, size=(target_h, target_w), mode='bicubic')
-            
-            # Scale back to [-1, 1] range
-            comfy_latent = comfy_latent * 2 - 1
-            
-            return (None, {"samples": comfy_latent})
+            return None, {"samples": latent_samples}
+
+    def image_to_latent(self, image_tensor):
+        # Convert image tensor to latent space
+        latent = image_tensor * 2 - 1  # Scale to [-1, 1]
+        
+        # Ensure the latent is in the shape [B, C, H, W]
+        if latent.dim() == 3:
+            latent = latent.unsqueeze(0)
+        
+        # If we have 3 channels, repeat one channel to get 4
+        if latent.shape[1] == 3:
+            latent = latent.repeat(1, 2, 1, 1)[:, :4, :, :]
+        
+        # Downsample to match expected latent size (1/8th of image size)
+        B, C, H, W = latent.shape
+        latent = F.interpolate(latent, size=(H // 8, W // 8), mode='bilinear', align_corners=False)
+        
+        return {"samples": latent}
 
 NODE_CLASS_MAPPINGS = {
     "LuminamGPTLoader": LuminamGPTLoader,
