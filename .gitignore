@@ -1,0 +1,7 @@
+# Ignore the large unzipped files
+Lumina-mGPT/lumina_mgpt/ckpts/chameleon/tokenizer/vqgan.ckpt
+
+# Optionally, ignore all .ckpt files in this directory
+Lumina-mGPT/lumina_mgpt/ckpts/chameleon/tokenizer/*.ckpt
+
+# If there are other large files you want to ignore, add them here
