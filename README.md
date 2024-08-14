@@ -101,6 +101,10 @@ You can download the required files from [Meta's Chameleon Downloads](https://ai
 
 ![ComfyUI_temp_otjku_00004_](https://github.com/user-attachments/assets/902d79a1-7bff-42c5-a4f2-c2b334a89ed6)
 
+![ComfyUI_temp_hvkgz_00001_](https://github.com/user-attachments/assets/6370c6bb-cd8f-4847-a843-9cbfae3aacbd)
+
+![Lumina-mGPT_00003_](https://github.com/user-attachments/assets/7092f514-d76a-400a-8072-cd769e8678fc)
+
 
 ## Workflow
 ![Screenshot 2024-08-14 082926](https://github.com/user-attachments/assets/c6c064ad-5805-4d71-9d90-cb665728a995)
