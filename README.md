@@ -16,7 +16,7 @@ This custom node integrates the Lumina-mGPT model into ComfyUI, enabling high-qu
 ## Preparation
 Since the Chameleon implementation in transformers does not contain the VQ-VAE decoder, please manually download the original VQ-VAE weights provided by Meta and place them in the following directory:
 
-# I've added the files to the respective path however they will need to be extracted from the zip file before running the node.
+### NOTE: I've added the files to the respective path however they will need to be extracted from the zip file before running the node.
 
 ```
 Lumina-mGPT
@@ -40,6 +40,14 @@ You can download the required files from [Meta's Chameleon Downloads](https://ai
    git clone https://github.com/yourusername/ComfyUI-Lumina-mGPT-Wrapper.git
    ```
 3. The required dependencies will be automatically installed.
+
+4. If you are having trouble you may have to install XLLMX independently but copying the path of your python_embedded python.exe and running in the Lumina-mGPT
+   directory
+
+    ### go to the root path of the project
+    cd Lumina_mGPT
+    ### install as package
+    "Path to your embedded python.exe" pip -m install -e .
 
 ## Usage
 1. Launch ComfyUI.
