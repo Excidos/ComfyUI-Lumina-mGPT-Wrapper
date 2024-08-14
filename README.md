@@ -16,6 +16,8 @@ This custom node integrates the Lumina-mGPT model into ComfyUI, enabling high-qu
 ## Preparation
 Since the Chameleon implementation in transformers does not contain the VQ-VAE decoder, please manually download the original VQ-VAE weights provided by Meta and place them in the following directory:
 
+# I've added the files to the respective path however they will need to be extracted from the zip file before running the node.
+
 ```
 Lumina-mGPT
 - lumina_mgpt/
@@ -76,6 +78,11 @@ You can download the required files from [Meta's Chameleon Downloads](https://ai
 ## Outputs
 - `IMAGE`: Generated or decoded image
 - `LATENT`: Latent representation of the generated image
+
+## Examples
+
+![Screenshot 2024-08-14 082926](https://github.com/user-attachments/assets/c6c064ad-5805-4d71-9d90-cb665728a995)
+
 
 ## Known Features and Limitations
 - Supports multiple model sizes for different use cases
