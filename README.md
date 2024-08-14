@@ -89,13 +89,14 @@ You can download the required files from [Meta's Chameleon Downloads](https://ai
 
 ## Examples
 
+## 512 x 512
 ![ComfyUI_temp_otjku_00001_](https://github.com/user-attachments/assets/eca8656d-1631-4587-ab03-7574fdfd7bcd)
 
-## 512 x 512
-
-![ComfyUI_temp_otjku_00002_](https://github.com/user-attachments/assets/17fa9ba5-323e-41ef-a27e-ac26dc82e22b)
 
 ## 768 x 768 
+![ComfyUI_temp_otjku_00002_](https://github.com/user-attachments/assets/17fa9ba5-323e-41ef-a27e-ac26dc82e22b)
+
+
 
 ![Screenshot 2024-08-14 082926](https://github.com/user-attachments/assets/c6c064ad-5805-4d71-9d90-cb665728a995)
 
