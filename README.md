@@ -37,7 +37,7 @@ You can download the required files from [Meta's Chameleon Downloads](https://ai
 1. Ensure you have ComfyUI installed and properly set up.
 2. Clone this repository into your ComfyUI custom nodes directory:
    ```
-   git clone https://github.com/yourusername/ComfyUI-Lumina-mGPT-Wrapper.git
+   git clone https://github.com/Excidos/ComfyUI-Lumina-mGPT-Wrapper.git
    ```
 3. The required dependencies will be automatically installed.
 
