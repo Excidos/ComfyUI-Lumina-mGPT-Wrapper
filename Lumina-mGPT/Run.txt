@@ -1,0 +1,6 @@
+cd lumina_mgpt
+set PYTHONPATH=%PYTHONPATH%;F:\AI\Lumina-mGPT\lumina_mgpt
+python -u demos/demo_image_generation.py --pretrained_path "F:\AI\Lumina-mGPT\Lumina-mGPT-7B-768" --target_size 768
+
+
+python -u demos/demo_image_generation.py --pretrained_path "F:\AI\Lumina-mGPT\Lumina-mGPT-7B-512" --target_size 512
