@@ -1,0 +1,32 @@
+[project]
+name = "comfyui-lumina-mgpt-wrapper"
+description = "ComfyUI-Lumina-mGPT-Wrapper is a custom node for ComfyUI that integrates the advanced Lumina-mGPT model. It offers high-quality image generation with support for multiple model sizes and advanced features. This node brings the power of the Lumina text-to-image pipeline directly into ComfyUI workflows."
+version = "1.0.0"
+license = "LICENSE"
+dependencies = [
+    "pandas",
+    "tensorboard",
+    "fairscale",
+    "sentencepiece",
+    "gradio==4.19.0",
+    "packaging",
+    "transformers>=4.43.3",
+    "pyyaml",
+    "pathlib",
+    "Ninja",
+    "bitsandbytes",
+    "httpx[socks]",
+    "einops",
+    "regex",
+    "h5py",
+    "accelerate",
+    "pre-commit"
+]
+
+[project.urls]
+Repository = "https://github.com/Excidos/ComfyUI-Lumina-mGPT-Wrapper"
+
+[tool.comfy]
+PublisherId = "d9fd0ca0-fa6b-4902-b025-0e14d9283d6d"
+DisplayName = "ComfyUI-Lumina-mGPT Wrapper"
+Icon = "https://imgur.com/a/jmt7W6y"
